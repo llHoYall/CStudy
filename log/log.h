@@ -8,8 +8,8 @@
  *	- 2018.01.25	Created.
  ******************************************************************************/
 
-#ifndef __LOG_H__
-#define __LOG_H__
+#ifndef __HoYa_LOG_H__
+#define __HoYa_LOG_H__
 
 /* Include Headers -----------------------------------------------------------*/
 #include "log_conf.h"
@@ -49,7 +49,10 @@ typedef enum _eLOG_LEVEL {
 	#define LOG_Debug(fmt, ...)
 #endif
 
+#define LOG_Dump(data, len)			Log_Dump(data, len)
+
 /* API Prototypes ------------------------------------------------------------*/
 void Log_Print(const eLOG_LEVEL lv, const char* fmt, ...);
+void Log_Dump(const char* data, int len);
 
 #endif

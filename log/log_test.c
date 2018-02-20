@@ -10,6 +10,7 @@
 
 /* Include Headers -----------------------------------------------------------*/
 // System
+#include <stdlib.h>
 #include "log.h"
 
 /* Main Function -------------------------------------------------------------*/
@@ -18,12 +19,19 @@ int main(int argc, char* argv[]) {
 	(void)argv;
 
 	LOG("This is a test string\r\n");
-	int i = 1;
-	LOG("Formatter test: %d\r\n", i);
+	int d = 1;
+	LOG("Formatter test: %d\r\n", d);
 
 	LOG_User("This is a user String\r\n");
 	LOG_System("This is a system String\r\n");
 	LOG_Debug("This is a debug String\r\n");
+
+	char test[64];
+	for (int i = 0; i < 64; ++i) {
+		test[i] = rand() % 128;
+	}
+	LOG_Dump(test, 5);
+	LOG_Dump(test, 48);
 
 	return 0;
 }
