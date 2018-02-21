@@ -2,7 +2,6 @@
  * @file		log.h
  * @brief		Display log.
  * @author	llHoYall <hoya128@gmail.com>
- *******************************************************************************
  * @version	v1.0
  * @note
  *	- 2018.01.25	Created.
