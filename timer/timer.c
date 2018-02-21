@@ -1,6 +1,6 @@
 /*******************************************************************************
  * @file		timer.c
- * @brief		Timer module.
+ * @brief		POSIX real-time timer.
  * @author	llHoYall <hoya128@gmail.com>
  * @version	v1.0
  * @note
@@ -11,7 +11,6 @@
  *	-	ITIMER_VIRTUAL	->	SIGVTALRM
  *	- ITIMER_PROF			->	SIGPROF
  ******************************************************************************/
-
 
 /* Include Headers -----------------------------------------------------------*/
 // Standard

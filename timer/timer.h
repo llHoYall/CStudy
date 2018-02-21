@@ -1,8 +1,7 @@
 /*******************************************************************************
  * @file		timer.h
- * @brief		Timer module.
+ * @brief		POSIX real-time timer.
  * @author	llHoYall <hoya128@gmail.com>
- *******************************************************************************
  * @version	v1.0
  * @note
  *	- 2018.02.20	Created.

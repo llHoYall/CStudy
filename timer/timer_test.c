@@ -2,7 +2,6 @@
  * @file		timer_test.c
  * @brief		Test timer module.
  * @author	llHoYall <hoya128@gmail.com>
- *******************************************************************************
  * @version	v1.0
  * @note
  *	- 2018.02.20	Created.
