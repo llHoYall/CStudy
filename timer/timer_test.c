@@ -14,12 +14,15 @@
 #include "timer.h"
 
 /* Global Variables ----------------------------------------------------------*/
+// Method 2
 timer_t	tid1;
 timer_t	tid2;
 
 /* Private Function Prototypes -----------------------------------------------*/
-static void Timer_Handler1(int signum);
-static void Timer_Handler2(int sig, siginfo_t* si, void* uc);
+// Method 1
+static void tmhandler1(int signum);
+// Method 2
+static void tmhandler2(int sig, siginfo_t* si, void* uc);
 
 /* Main Function -------------------------------------------------------------*/
 int main(int argc, char* argv[]) {
@@ -27,11 +30,11 @@ int main(int argc, char* argv[]) {
 	(void)argv;
 
 	// Method1
-	Timer_Create1(500, &Timer_Handler1);
+	Timer_Create1(500, tmhandler1);
 
 	// Method2
-	Timer_Create2(&tid1, 1000, &Timer_Handler2);
-	Timer_Create2(&tid2, 2500, &Timer_Handler2);
+	Timer_Create2(&tid1, 1000, &tmhandler2);
+	Timer_Create2(&tid2, 2500, &tmhandler2);
 
 	while (1) {
 	}
@@ -40,12 +43,14 @@ int main(int argc, char* argv[]) {
 }
 
 /* Private Functions ---------------------------------------------------------*/
-static void Timer_Handler1(int signum) {
+// Method 1
+static void tmhandler1(int signum) {
 	static int count = 0;
 	printf("Timer1: %d\n", ++count);
 }
 
-static void Timer_Handler2(int sig, siginfo_t* si, void* uc) {
+// Method 2
+static void tmhandler2(int sig, siginfo_t* si, void* uc) {
 	static int count1 = 0;
 	static int count2 = 0;
 	timer_t* ptid = si->si_value.sival_ptr;

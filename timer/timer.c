@@ -6,10 +6,14 @@
  * @note
  *	- 2018.02.20	Created.
  *******************************************************************************
+ *  Method 1
  *		setitimer()					sigaction()
  *	-	ITIMER_REAL			->	SIGALRM
  *	-	ITIMER_VIRTUAL	->	SIGVTALRM
  *	- ITIMER_PROF			->	SIGPROF
+ *
+ *	Method 2
+ *   	Need rt library.
  ******************************************************************************/
 
 /* Include Headers -----------------------------------------------------------*/
@@ -21,7 +25,8 @@
 #include "timer.h"
 
 /* APIs ----------------------------------------------------------------------*/
-eTIMER_STATUS Timer_Create1(const int msec, void (*pfn)(int)) {
+// Method 1
+eTIMER_STATUS Timer_Create1(const int msec, Timer_Handler1 handler) {
 	struct itimerval	itv;
 	itv.it_value.tv_sec = msec / 1000;
 	itv.it_value.tv_usec = (msec % 1000) * 1000;
@@ -34,7 +39,7 @@ eTIMER_STATUS Timer_Create1(const int msec, void (*pfn)(int)) {
 
 	struct sigaction	sa;
 	memset(&sa, 0, sizeof(sa));
-	sa.sa_handler = pfn;
+	sa.sa_handler = handler;
 	if (sigaction(SIGVTALRM, &sa, NULL) < 0) {
 		perror("sigaction()");
 		return eTIMER_STATUS_FAIL_CREATE;
@@ -43,7 +48,8 @@ eTIMER_STATUS Timer_Create1(const int msec, void (*pfn)(int)) {
 	return eTIMER_STATUS_SUCCESS;
 }
 
-eTIMER_STATUS Timer_Create2(timer_t* tid, int msec, void (*pfn)(int, siginfo_t*, void*)) {
+// Method 2
+eTIMER_STATUS Timer_Create2(timer_t* tid, int msec, Timer_Handler2 handler) {
 	struct sigevent	se;
 	se.sigev_notify = SIGEV_SIGNAL;
 	se.sigev_signo = SIGRTMIN;
@@ -65,7 +71,7 @@ eTIMER_STATUS Timer_Create2(timer_t* tid, int msec, void (*pfn)(int, siginfo_t*,
 
 	struct sigaction	sa;
 	memset(&sa, 0, sizeof(sa));
-	sa.sa_sigaction = pfn;
+	sa.sa_sigaction = handler;
 	sigemptyset(&sa.sa_mask);
 	sa.sa_flags = SA_SIGINFO;
 	if (sigaction(SIGRTMIN, &sa, NULL) < 0) {
