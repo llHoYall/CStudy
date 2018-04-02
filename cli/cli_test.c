@@ -10,17 +10,20 @@
 /* Include Headers -----------------------------------------------------------*/
 // Standard
 #include <stdlib.h>
+#include <stdio.h>
 #include <unistd.h>
 // System
 #include "cli.h"
 
 /* Private Function Prototypes -----------------------------------------------*/
 static void CMD_Help(int argc, char* argv[]);
+static void CMD_Test(int argc, char* argv[]);
 static void CMD_Exit(int argc, char* argv[]);
 
 /* Private Variables ---------------------------------------------------------*/
 tCOMMAND	tCmd[] = {
 	{"Help", "    Display menu", CMD_Help},
+	{"Test", "    Testing", CMD_Test},
 	{"Exit", "    Exit program", CMD_Exit},
 	{NULL, NULL, NULL}
 };
@@ -31,7 +34,7 @@ int main(int argc, char* argv[]) {
 	(void)argv;
 
 	CLI_Init(tCmd);
-	CLI_DisplayMenu();
+	//CLI_DisplayMenu();
 
 	while (1) {
 		CLI_GetCommand();
@@ -48,6 +51,13 @@ static void CMD_Help(int argc, char* argv[]) {
 	(void)argv;
 
 	CLI_DisplayMenu();
+}
+
+static void CMD_Test(int argc, char* argv[]) {
+	(void)argc;
+	(void)argv;
+
+	puts("Done");
 }
 
 static void CMD_Exit(int argc, char* argv[]) {

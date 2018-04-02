@@ -1,2 +1,5 @@
 # Build
 build/
+
+# Python
+__pycache__/
