@@ -18,15 +18,14 @@ import node
 # Test Class -----------------------------------------------------------------#
 class ProtocolTest(unittest.TestCase):
     def setUp(self):
-        self.nodes = {}
-        self.nodes = node.Node(0)
+        self.node = node.Node(0)
 
     def tearDown(self):
-        self.nodes.stop()
-        del self.nodes
+        self.node.stop()
+        del self.node
 
     def test(self):
-        self.nodes.test()
+        self.node.test()
 
 
 # Main Routine ---------------------------------------------------------------#
