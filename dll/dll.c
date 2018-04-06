@@ -45,13 +45,21 @@ eDLL_STATUS DLL_AppendTail(const ptDLL head, const ptDLL node) {
 	return eDLL_STATUS_SUCCESS;
 }
 
+eDLL_STATUS DLL_RemoveNode(const ptDLL node) {
+	if (node == NULL)
+		return eDLL_STATUS_INVALID_ARGS;
+
+	(node->prev)->next = node->next;
+	(node->next)->prev = node->prev;
+	return eDLL_STATUS_SUCCESS;
+}
+
 eDLL_STATUS DLL_RemoveHead(const ptDLL head, const pptDLL node) {
 	if (head == NULL)
 		return eDLL_STATUS_INVALID_ARGS;
 
 	*node = head->next;
-	head->next = (*node)->next;
-	((*node)->next)->prev  = head;
+	DLL_RemoveNode(head->next);
 	(*node)->prev = NULL;
 	(*node)->next = NULL;
 	return eDLL_STATUS_SUCCESS;
@@ -62,8 +70,7 @@ eDLL_STATUS DLL_RemoveTail(const ptDLL head, const pptDLL node) {
 		return eDLL_STATUS_INVALID_ARGS;
 
 	*node = head->prev;
-	((*node)->prev)->next = head;
-	head->prev = (*node)->prev;
+	DLL_RemoveNode(head->prev);
 	(*node)->prev = NULL;
 	(*node)->next = NULL;
 	return eDLL_STATUS_SUCCESS;

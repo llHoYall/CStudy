@@ -26,6 +26,7 @@ typedef struct _tDLL {
 eDLL_STATUS DLL_Init(const ptDLL head);
 eDLL_STATUS DLL_InsertHead(const ptDLL head, const ptDLL node);
 eDLL_STATUS DLL_AppendTail(const ptDLL head, const ptDLL node);
+eDLL_STATUS DLL_RemoveNode(const ptDLL node);
 eDLL_STATUS DLL_RemoveHead(const ptDLL head, const pptDLL node);
 eDLL_STATUS DLL_RemoveTail(const ptDLL head, const pptDLL node);
 eDLL_STATUS DLL_RemoveAll(const ptDLL head);
