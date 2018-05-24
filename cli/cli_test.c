@@ -34,7 +34,7 @@ int main(int argc, char* argv[]) {
 	(void)argv;
 
 	CLI_Init(tCmd);
-	//CLI_DisplayMenu();
+	CLI_DisplayMenu();
 
 	while (1) {
 		CLI_GetCommand();
@@ -58,6 +58,7 @@ static void CMD_Test(int argc, char* argv[]) {
 	(void)argv;
 
 	puts("Done");
+	puts("Melong");
 }
 
 static void CMD_Exit(int argc, char* argv[]) {

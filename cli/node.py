@@ -30,6 +30,7 @@ class Node:
     def test(self):
         self.send_command('Test')
         self.pexpect.expect('Done')
+        self.pexpect.expect('Melong')
 
     def stop(self):
         self.send_command('Exit')
